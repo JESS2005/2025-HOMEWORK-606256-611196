@@ -113,6 +113,10 @@ public class Stanza {
         	return false;
         }
     }
+    
+    public boolean isPiena() {
+    	return this.numeroAttrezzi == NUMERO_MASSIMO_ATTREZZI;
+    }
 
    /**
 	* Restituisce una rappresentazione stringa di questa stanza,
@@ -142,7 +146,7 @@ public class Stanza {
 		boolean trovato;
 		trovato = false;
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
+			if (attrezzo!=null&&attrezzo.getNome().equals(nomeAttrezzo))
 				trovato = true;
 		}
 		return trovato;
@@ -158,7 +162,7 @@ public class Stanza {
 		Attrezzo attrezzoCercato;
 		attrezzoCercato = null;
 		for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo.getNome().equals(nomeAttrezzo))
+			if (attrezzo!=null&&attrezzo.getNome().equals(nomeAttrezzo))
 				attrezzoCercato = attrezzo;
 		}
 		return attrezzoCercato;	
@@ -169,8 +173,21 @@ public class Stanza {
 	 * @param nomeAttrezzo
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
-	public boolean removeAttrezzo(Attrezzo attrezzo) {
-		// TODO da implementare
+	public boolean removeAttrezzo(Attrezzo attrezzoRem) {
+		/*for (Attrezzo attrezzo : this.attrezzi) {
+			if (attrezzo==attrezzoRem) {
+				attrezzo=null;
+				System.out.println("Rimosso??");
+				return true;
+			}
+		}*/
+		
+		for	(int i=0;i<NUMERO_MASSIMO_ATTREZZI;i++) {
+			if (this.attrezzi[i]==attrezzoRem) {
+				this.attrezzi[i]=null;
+				return true;
+			}
+		}
 		return false;
 	}
 

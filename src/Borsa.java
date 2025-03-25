@@ -1,5 +1,6 @@
 public class Borsa {
 	public final static int DEFAULT_PESO_MAX_BORSA = 10;
+	public final static int DEFAULT_NUMERO_MAX_BORSA = 10;
 	private Attrezzo[] attrezzi;
 	private int numeroAttrezzi;
 	private int pesoMax;
@@ -10,7 +11,7 @@ public class Borsa {
 
 	public Borsa(int pesoMax) {
 		this.pesoMax = pesoMax;
-		this.attrezzi = new Attrezzo[10]; // speriamo bastino...
+		this.attrezzi = new Attrezzo[DEFAULT_NUMERO_MAX_BORSA]; // speriamo bastino...
 		this.numeroAttrezzi = 0;
 	}
 
@@ -54,8 +55,28 @@ public class Borsa {
 	}
 
 	public Attrezzo removeAttrezzo(String nomeAttrezzo) {
+		boolean rimosso=false;
 		Attrezzo a = null;
-// ---> TODO (implementare questo metodo) <---
+		for	(int i=0;i<numeroAttrezzi;i++) {
+			if (rimosso) {
+				if (i==numeroAttrezzi-1) {
+					this.attrezzi[i]=null;
+				} else {
+					this.attrezzi[i]=this.attrezzi[i+1];
+				}
+			} else {
+				if (this.attrezzi[i].getNome().equals(nomeAttrezzo)) {
+					a=this.attrezzi[i];
+					numeroAttrezzi--;
+					if (i==numeroAttrezzi-1) {
+						this.attrezzi[i]=null;
+					} else {
+						this.attrezzi[i]=this.attrezzi[i+1];
+					}
+					rimosso=true;
+				}
+			}
+		}
 		return a;
 	}
 

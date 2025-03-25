@@ -26,7 +26,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa"};
 
 	private Partita partita;
 
@@ -61,6 +61,10 @@ public class DiaDia {
 			this.vai(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("aiuto"))
 			this.aiuto();
+		else if (comandoDaEseguire.getNome().equals("prendi"))
+			this.prendi(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("posa"))
+			this.posa(comandoDaEseguire.getParametro());
 		else
 			System.out.println("Comando sconosciuto");
 		if (this.partita.vinta()) {
@@ -94,8 +98,9 @@ public class DiaDia {
 			System.out.println("Direzione inesistente");
 		else {
 			this.partita.setStanzaCorrente(prossimaStanza);
-			int cfu = this.partita.getCfu();
-			this.partita.setCfu(cfu--);
+			int cfu = this.partita.getGiocatore().getCfu();
+			System.out.println(partita.getGiocatore().getCfu());
+			this.partita.getGiocatore().setCfu(--cfu);
 		}
 		System.out.println(partita.getStanzaCorrente().getDescrizione());
 	}
@@ -105,6 +110,42 @@ public class DiaDia {
 	 */
 	private void fine() {
 		System.out.println("Grazie di aver giocato!");  // si desidera smettere
+	}
+	
+	private void prendi(String nome) {
+		if(nome!=null) {
+			Attrezzo att=partita.getStanzaCorrente().getAttrezzo(nome);
+			if (att!=null) {
+				if (partita.getGiocatore().getBorsa().addAttrezzo(att)) {
+					partita.getStanzaCorrente().removeAttrezzo(att);
+					System.out.print("Hai preso: ");
+					System.out.println(nome);
+				} else {
+					System.out.println("Borsa piena");
+				}
+			} else {
+				System.out.print("Niente ");
+				System.out.println(nome);
+			}
+		}
+	}
+	
+	private void posa(String nome) {
+		if(nome!=null) {
+			if (!partita.getStanzaCorrente().isPiena()) {
+				Attrezzo att=partita.getGiocatore().getBorsa().removeAttrezzo(nome);
+				if (att!=null) {
+					partita.getStanzaCorrente().addAttrezzo(att);
+					System.out.print("Hai posato: ");
+					System.out.println(nome);
+				} else {
+					System.out.print("Niente ");
+					System.out.println(nome);
+				}
+			} else {
+				System.out.println("La stanza è piena");
+			}
+		}
 	}
 
 	public static void main(String[] argc) {
