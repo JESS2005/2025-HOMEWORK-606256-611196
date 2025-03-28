@@ -105,9 +105,14 @@ public class Stanza {
      */
     public boolean addAttrezzo(Attrezzo attrezzo) {
         if (this.numeroAttrezzi < NUMERO_MASSIMO_ATTREZZI) {
-        	this.attrezzi[numeroAttrezzi] = attrezzo;
-        	this.numeroAttrezzi++;
-        	return true;
+        	for(int i=0;i<NUMERO_MASSIMO_ATTREZZI;i++) {
+        		if (this.attrezzi[i]==null) {
+                	this.attrezzi[i] = attrezzo;
+                	this.numeroAttrezzi++;
+                	return true;
+        		}
+        	}
+        	return false;
         }
         else {
         	return false;
@@ -174,17 +179,11 @@ public class Stanza {
 	 * @return true se l'attrezzo e' stato rimosso, false altrimenti
 	 */
 	public boolean removeAttrezzo(Attrezzo attrezzoRem) {
-		/*for (Attrezzo attrezzo : this.attrezzi) {
-			if (attrezzo==attrezzoRem) {
-				attrezzo=null;
-				System.out.println("Rimosso??");
-				return true;
-			}
-		}*/
 		
 		for	(int i=0;i<NUMERO_MASSIMO_ATTREZZI;i++) {
 			if (this.attrezzi[i]==attrezzoRem) {
 				this.attrezzi[i]=null;
+				this.numeroAttrezzi--;
 				return true;
 			}
 		}
