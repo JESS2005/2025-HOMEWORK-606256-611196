@@ -66,5 +66,7 @@ public class Partita {
 		this.finita = true;
 	}
 
-	
+	public Labirinto getLabirinto() {
+		return this.labirinto;
+	}
 }
