@@ -67,10 +67,14 @@ public class DiaDia {
 			this.posa(comandoDaEseguire.getParametro());
 		else
 			System.out.println("Comando sconosciuto");
+		
 		if (this.partita.vinta()) {
 			System.out.println("Hai vinto!");
 			return true;
-		} else
+		} if(this.partita.isFinita() ) {
+			System.out.println("Hai perso!");
+			return true;
+		}else
 			return false;
 	}   
 
@@ -99,7 +103,7 @@ public class DiaDia {
 		else {
 			this.partita.setStanzaCorrente(prossimaStanza);
 			int cfu = this.partita.getGiocatore().getCfu();
-			System.out.println(partita.getGiocatore().getCfu());
+			//System.out.println(partita.getGiocatore().getCfu());
 			this.partita.getGiocatore().setCfu(--cfu);
 		}
 		System.out.println(partita.getStanzaCorrente().getDescrizione());
