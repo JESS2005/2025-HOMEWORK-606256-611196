@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 /**
  * Classe Stanza - una stanza in un gioco di ruolo.
@@ -25,6 +26,8 @@ public class Stanza {
     private Stanza[] stanzeAdiacenti;
     private int numeroStanzeAdiacenti;
     
+    private String[] codiciAdiacenti;
+    
 	private String[] direzioni;
     
     /**
@@ -37,6 +40,7 @@ public class Stanza {
         this.numeroAttrezzi = 0;
         this.direzioni = new String[NUMERO_MASSIMO_DIREZIONI];
         this.stanzeAdiacenti = new Stanza[NUMERO_MASSIMO_DIREZIONI];
+        this.codiciAdiacenti = new String[NUMERO_MASSIMO_DIREZIONI];
         this.attrezzi = new Attrezzo[NUMERO_MASSIMO_ATTREZZI];
     }
 
@@ -47,6 +51,10 @@ public class Stanza {
      * @param stanza stanza adiacente nella direzione indicata dal primo parametro.
      */
     public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+    	impostaStanzaAdiacente(direzione,stanza,null);
+    }
+    
+    public void impostaStanzaAdiacente(String direzione, Stanza stanza, String codice) {
         boolean aggiornato = false;
     	for(int i=0; i<this.direzioni.length; i++)
         	if (direzione.equals(this.direzioni[i])) {
@@ -57,6 +65,7 @@ public class Stanza {
     		if (this.numeroStanzeAdiacenti < NUMERO_MASSIMO_DIREZIONI) {
     			this.direzioni[numeroStanzeAdiacenti] = direzione;
     			this.stanzeAdiacenti[numeroStanzeAdiacenti] = stanza;
+    			this.codiciAdiacenti[numeroStanzeAdiacenti] = codice;
     		    this.numeroStanzeAdiacenti++;
     		}
     }
@@ -71,6 +80,47 @@ public class Stanza {
         	if (this.direzioni[i].equals(direzione))
         		stanza = this.stanzeAdiacenti[i];
         return stanza;
+	}
+	
+	public String getNomeCodice(String direzione) {
+		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
+        	if (this.direzioni[i].equals(direzione))
+        		return this.codiciAdiacenti[i]; 
+        return null;
+	}
+	
+	public int sbloccaStanzaConBorsa(String direzione,Borsa borsa) {
+		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
+        	if (this.direzioni[i].equals(direzione)) {
+        		if (codiciAdiacenti[i]==null)
+        			return 1;
+        		if(borsa.hasAttrezzo(codiciAdiacenti[i])) {
+        			codiciAdiacenti[i]=null;
+        			return 2;
+        		}
+        	}
+        return 0;
+	}
+	
+	/*public Boolean sbloccaStanzaAdiacente(Stanza stanza) {
+		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
+        	if (this.stanzeAdiacenti[i]==stanza) {
+        		if (codiciAdiacenti[i]==null)
+        			return true;
+        		if(borsa.hasAttrezzo(codiciAdiacenti[i])) {
+        			codiciAdiacenti[i]=null;
+        			return true;
+        		}
+        	}
+        return false;
+	}*/
+	
+	public String getCodice(Stanza stanza) {
+		for(int i=0; i<this.numeroStanzeAdiacenti; i++)
+        	if (this.stanzeAdiacenti[i]==stanza) {
+        		return this.codiciAdiacenti[i];
+        	}
+        return null;
 	}
 
     /**

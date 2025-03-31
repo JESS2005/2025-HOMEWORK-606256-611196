@@ -4,6 +4,7 @@ package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.giocatore.Borsa;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -31,7 +32,7 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa","osserva","inv"};
 
 	private Partita partita;
 
@@ -71,6 +72,10 @@ public class DiaDia {
 			this.prendi(comandoDaEseguire.getParametro());
 		else if (comandoDaEseguire.getNome().equals("posa"))
 			this.posa(comandoDaEseguire.getParametro());
+		else if (comandoDaEseguire.getNome().equals("osserva"))
+			this.stampe.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+		else if (comandoDaEseguire.getNome().equals("inv"))
+			this.stampe.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
 		else
 			this.stampe.mostraMessaggio("Comando sconosciuto");
 		
@@ -108,12 +113,21 @@ public class DiaDia {
 		if (prossimaStanza == null)
 			this.stampe.mostraMessaggio("Direzione inesistente");
 		else {
-			this.partita.setStanzaCorrente(prossimaStanza);
-			int cfu = this.partita.getGiocatore().getCfu();
-			//this.stampe.mostraMessaggio(partita.getGiocatore().getCfu());
-			this.partita.getGiocatore().setCfu(--cfu);
+			int pass=this.partita.getStanzaCorrente().sbloccaStanzaConBorsa(direzione,partita.getGiocatore().getBorsa());
+			if (pass!=0) {
+				if (pass==2)
+					this.stampe.mostraMessaggio("Porta sbloccata");
+				this.partita.setStanzaCorrente(prossimaStanza);
+				int cfu = this.partita.getGiocatore().getCfu();
+				//this.stampe.mostraMessaggio(partita.getGiocatore().getCfu());
+				this.partita.getGiocatore().setCfu(--cfu);
+				this.stampe.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+			} else {
+				this.stampe.mostraMessaggio("Per passare serve "+this.partita.getStanzaCorrente().getNomeCodice(direzione));
+			}
+
 		}
-		this.stampe.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
+		
 	}
 
 	/**
