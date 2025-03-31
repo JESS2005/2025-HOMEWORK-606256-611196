@@ -2,8 +2,6 @@ package it.uniroma3.diadia;
 
 
 
-import java.util.Scanner;
-
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -131,14 +129,12 @@ public class DiaDia {
 			if (att!=null) {
 				if (partita.getGiocatore().getBorsa().addAttrezzo(att)) {
 					partita.getStanzaCorrente().removeAttrezzo(att);
-					System.out.print("Hai preso: ");
-					this.stampe.mostraMessaggio(nome);
+					this.stampe.mostraMessaggio("Hai preso: "+nome);
 				} else {
 					this.stampe.mostraMessaggio("Borsa piena");
 				}
 			} else {
-				System.out.print("Niente ");
-				this.stampe.mostraMessaggio(nome);
+				this.stampe.mostraMessaggio("Niente "+nome);
 			}
 		}
 	}
@@ -149,11 +145,9 @@ public class DiaDia {
 				Attrezzo att=partita.getGiocatore().getBorsa().removeAttrezzo(nome);
 				if (att!=null) {
 					partita.getStanzaCorrente().addAttrezzo(att);
-					System.out.print("Hai posato: ");
-					this.stampe.mostraMessaggio(nome);
+					this.stampe.mostraMessaggio("Hai posato: "+nome);
 				} else {
-					System.out.print("Niente ");
-					this.stampe.mostraMessaggio(nome);
+					this.stampe.mostraMessaggio("Niente "+nome);
 				}
 			} else {
 				this.stampe.mostraMessaggio("La stanza è piena");
