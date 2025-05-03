@@ -1,5 +1,6 @@
 package it.uniroma3.diadia.comandi;
 
+import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -8,7 +9,7 @@ public class ComandoPosa implements Comando {
 	private String nome;
 
 	@Override
-	public void esegui(Partita partita, IOConsole stampe) {
+	public void esegui(Partita partita, IO stampe) {
 		if(nome!=null) {
 			if (!partita.getStanzaCorrente().isPiena()) {
 				Attrezzo att=partita.getGiocatore().getBorsa().removeAttrezzo(nome);

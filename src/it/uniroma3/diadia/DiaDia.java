@@ -21,7 +21,7 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 public class DiaDia {
 
-	private IOConsole stampe;
+	private IO stampe;
 	
 	static final private String MESSAGGIO_BENVENUTO = ""+
 			"Ti trovi nell'Universita', ma oggi e' diversa dal solito...\n" +
@@ -39,9 +39,9 @@ public class DiaDia {
     private FabbricaDiComandiFisarmonica factory;
 	
 	
-	public DiaDia(IOConsole stampe) {
+	public DiaDia(IO io) {
 		this.partita = new Partita();
-		this.stampe = stampe;
+		this.stampe = io;
 		this.factory= new FabbricaDiComandiFisarmonica();
 	}	
 	
@@ -181,7 +181,8 @@ public class DiaDia {
 	}
 
 	public static void main(String[] argc) {
-		DiaDia gioco = new DiaDia(new IOConsole());
+		IO io= new IOConsole();
+		DiaDia gioco = new DiaDia(io);
 		gioco.gioca();
 		 
 	}
