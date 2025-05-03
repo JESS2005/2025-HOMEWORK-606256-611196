@@ -4,6 +4,8 @@ package it.uniroma3.diadia;
 
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.comandi.Comando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -31,13 +33,16 @@ public class DiaDia {
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa","guarda"};
 
 	private Partita partita;
-
+    private FabbricaDiComandiFisarmonica factory;
+	
+	
 	public DiaDia(IOConsole stampe) {
 		this.partita = new Partita();
 		this.stampe = stampe;
+		this.factory= new FabbricaDiComandiFisarmonica();
 	}	
 	
 	
@@ -57,6 +62,24 @@ public class DiaDia {
 	 *
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
+	
+	private boolean processaIstruzione (String istruzione) {
+		
+		Comando comando = this.factory.costruisciComando(istruzione);
+		comando.esegui(partita, stampe);
+		if (this.partita.vinta()) {
+			this.stampe.mostraMessaggio("Hai vinto!");
+			return true;
+		} if(this.partita.isFinita() ) {
+			this.stampe.mostraMessaggio("Hai perso!");
+			return true;
+		}else
+			return false;
+		
+	}
+	
+	
+	/*
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = new Comando(istruzione);
 
@@ -83,6 +106,8 @@ public class DiaDia {
 		}else
 			return false;
 	}   
+	
+	*/
 
 	// implementazioni dei comandi dell'utente:
 
