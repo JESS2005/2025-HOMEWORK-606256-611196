@@ -21,7 +21,8 @@ public class Partita {
 	private Giocatore giocatore;
 	
 	public Partita(){
-		labirinto= new Labirinto(this);
+		labirinto= new Labirinto();
+		this.setStanzaCorrente(labirinto.getStanzaIniziale());
 		this.finita = false;
 		giocatore = new Giocatore(CFU_INIZIALI);
 	}
