@@ -47,4 +47,20 @@ public class testStanza {
 		assertTrue(this.stanza.addAttrezzo(new Attrezzo("testatt2", 5)));
 		assertNotNull(this.stanza.hasAttrezzo("testatt2"));
 	}
+	
+	@Test
+	void testTantiAttrezzi() {
+		for (int i=1;i<10;i++) {
+			//uno gia presente dal setup
+			assertTrue(this.stanza.addAttrezzo(new Attrezzo("testatt"+i, i)));
+		}
+		assertFalse(this.stanza.addAttrezzo(new Attrezzo("testatt10",1)));
+		for (int i=4;i<7;i++) {
+			assertTrue(this.stanza.removeAttrezzo(this.stanza.getAttrezzo("testatt"+i)));
+		}
+		for (int i=4;i<7;i++) {
+			assertTrue(this.stanza.addAttrezzo(new Attrezzo("testatt"+i, i)));
+		}
+		assertFalse(this.stanza.addAttrezzo(new Attrezzo("testatt10",1)));
+	}
 }
