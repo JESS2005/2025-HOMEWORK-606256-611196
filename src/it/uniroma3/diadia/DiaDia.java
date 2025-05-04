@@ -5,6 +5,7 @@ package it.uniroma3.diadia;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandi;
 import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 /**
@@ -36,7 +37,7 @@ public class DiaDia {
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa","guarda"};
 
 	private Partita partita;
-    private FabbricaDiComandiFisarmonica factory;
+    private FabbricaDiComandi factory;
 	
 	
 	public DiaDia(IO io) {
