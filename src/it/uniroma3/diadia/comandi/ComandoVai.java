@@ -29,4 +29,14 @@ public class ComandoVai implements Comando {
 	public void setParametro (String parametro) {
 		this.direzione=parametro;
 	}
+
+	@Override
+	public String getParametro() {
+		return this.direzione;
+	}
+	
+	@Override
+	public String getNome() {
+		return this.getClass().getName().substring(getClass().getName().indexOf("Comando")+7);
+	}
 }

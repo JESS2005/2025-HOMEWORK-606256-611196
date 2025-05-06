@@ -60,6 +60,10 @@ public class Partita {
 		return finita || vinta() || (giocatore.getCfu() == 0);
 	}
 
+	public boolean isFinitaComando() {
+		return finita;
+	}
+	
 	/**
 	 * Imposta la partita come finita
 	 *

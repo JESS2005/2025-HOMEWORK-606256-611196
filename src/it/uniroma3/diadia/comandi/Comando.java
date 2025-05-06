@@ -59,4 +59,8 @@ public interface Comando {
     public void esegui(Partita partita, IO stampe);
     
     public void setParametro(String parametro);
-}    
+    
+    public String getParametro();
+    
+    public String getNome();
+}

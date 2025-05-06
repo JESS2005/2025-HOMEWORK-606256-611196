@@ -71,6 +71,8 @@ public class DiaDia {
 		if (this.partita.vinta()) {
 			this.stampe.mostraMessaggio("Hai vinto!");
 			return true;
+		} if(this.partita.isFinitaComando() ) {
+			return true;
 		} if(this.partita.isFinita() ) {
 			this.stampe.mostraMessaggio("Hai perso!");
 			return true;
