@@ -130,14 +130,14 @@ public class Stanza {
     public String toString() {
     	StringBuilder risultato = new StringBuilder();
     	risultato.append(this.nome);
-    	risultato.append("\nUscite: ");
+    	risultato.append("\nUscite:");
     	for (String direzione : this.direzioni)
     		if (direzione!=null)
     			risultato.append(" " + direzione);
-    	risultato.append("\nAttrezzi nella stanza: ");
+    	risultato.append("\nAttrezzi nella stanza:");
     	for (Attrezzo attrezzo : this.attrezzi) {
     		if(attrezzo!=null) 
-    			risultato.append(attrezzo.toString()+" ");
+    			risultato.append(" "+attrezzo.toString());
     	}
     	return risultato.toString();
     }
