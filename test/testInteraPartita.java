@@ -29,7 +29,7 @@ class testInteraPartita {
 		String[] expected= {"ignora",
 				"Aula N10\n"+ "Uscite: nord est ovest\n" + "Attrezzi nella stanza: lanterna (3kg)",
 				"Hai preso: lanterna",
-				"Atrio\n"+ "Uscite: nord est sud ovest\n"+ "Attrezzi nella stanza: osso (1kg)",
+				"Atrio\n"+ "Uscite: nord sud est ovest\n"+ "Attrezzi nella stanza: osso (1kg)",
 				"Hai preso: osso",
 				"Hai posato: lanterna",
 				"ignora",
@@ -78,7 +78,7 @@ class testInteraPartita {
 				"ignora",
 				"qui c'è buio pesto, devi portare: lanterna",
 				"ignora",
-				"Aula N11\n"+ "Uscite: est ovest\n"+ "Attrezzi nella stanza: lanterna (3kg)",
+				"Aula N11\n"+ "Uscite: est ovest\n"+ "Attrezzi nella stanza: lanterna (3kg)\n"+"CFU: 18\n"+"Borsa vuota",
 				"Grazie di aver giocato!"};
 		int i=0;
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
