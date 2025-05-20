@@ -1,6 +1,14 @@
+
 package it.uniroma3.diadia.giocatore;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -74,6 +82,50 @@ public class Borsa {
 			
 		} else
 			s.append("Borsa vuota");
+		getContenutoOrdinatoPerPeso();
 		return s.toString();
+	}
+	
+	public List<Attrezzo> getContenutoOrdinatoPerPeso() {
+		List<Attrezzo> contenuto=new ArrayList<Attrezzo>();
+		for (Map.Entry<String,Attrezzo> m : this.attrezzi.entrySet()){
+			contenuto.add(m.getValue());
+		}
+		contenuto.sort(Comparator.comparingInt(Attrezzo::getPeso).thenComparing(Attrezzo::getNome));
+		return contenuto;
+	}
+	
+	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome() {
+		Comparator<Attrezzo> compare= Comparator.comparing(Attrezzo::getNome);
+		SortedSet<Attrezzo> contenuto=new TreeSet<Attrezzo>(compare);
+		for (Map.Entry<String,Attrezzo> m : this.attrezzi.entrySet()){
+			contenuto.add(m.getValue());
+		}
+		return contenuto;
+	}
+	
+	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso() {
+		Comparator<Attrezzo> compare= Comparator.comparingInt(Attrezzo::getPeso).thenComparing(Attrezzo::getNome);
+		SortedSet<Attrezzo> contenuto=new TreeSet<Attrezzo>(compare);
+		for (Map.Entry<String,Attrezzo> m : this.attrezzi.entrySet()){
+			contenuto.add(m.getValue());
+		}
+		return contenuto;
+	}
+	
+	public Map<Integer,Set<Attrezzo>> getContenutoRaggruppatoPerPeso() {
+		Map<Integer,Set<Attrezzo>> contenuto=new HashMap<Integer,Set<Attrezzo>>();
+		for (Map.Entry<String,Attrezzo> m : this.attrezzi.entrySet()){
+			Attrezzo corrente=m.getValue();
+			if (contenuto.containsKey(corrente.getPeso())) {
+				contenuto.get(corrente.getPeso()).add(corrente);
+			} else {
+				Set<Attrezzo> nuovo=new HashSet<Attrezzo>();
+				nuovo.add(corrente);
+				contenuto.put(corrente.getPeso(), nuovo);
+				
+			}
+		}
+		return contenuto;
 	}
 }
