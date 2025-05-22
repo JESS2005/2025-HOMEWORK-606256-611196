@@ -1,15 +1,25 @@
 package it.uniroma3.diadia.ambienti;
+import java.util.HashMap;
+import java.util.Map;
+
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Labirinto {
 	private Stanza stanzaVincente;
 	private Stanza stanzaIniziale;
+	private Map<String, Stanza> stanze = new HashMap<String,Stanza>();
 	
 	
 	public Labirinto() {
 		creaStanze();
 	}
+	
+	public void addStanza (Stanza stanza) {
+		this.stanze.put(stanza.getNome(), stanza);
+	}
+	
+	
 	
 	private void creaStanze() {
 
@@ -47,10 +57,22 @@ public class Labirinto {
 		stanzaVincente = biblioteca;
     }
 
+	public void setStanzaVincente(Stanza stanza) {
+		this.stanzaVincente=stanza;
+	}
+	
+	public void setStanzaIniziale(Stanza stanza) {
+		this.stanzaIniziale=stanza;
+	}
+	
 	public Stanza getStanzaVincente() {
 		return stanzaVincente;
 	}
 	public Stanza getStanzaIniziale() {
 		return stanzaIniziale;
 	}	
+	
+	public Map<String, Stanza> getMappa() {
+		return stanze;
+	}
 }
