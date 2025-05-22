@@ -48,5 +48,17 @@ public class Attrezzo {
 	public String toString() {
 		return this.getNome()+" ("+this.getPeso()+"kg)";
 	}
-
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this==obj)
+			return true;
+		
+		if (obj==null|| this.getClass()!=obj.getClass())
+			return false;
+		
+		Attrezzo altro= (Attrezzo) obj;
+		
+		return altro.peso==this.peso && this.nome.equals(altro.getNome());
+	}
 }

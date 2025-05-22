@@ -1,4 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
+
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,10 +26,10 @@ public class testStanza {
 	
 	@Test 
 	void testGetDirezioni() {
-		String[] dirtest = this.stanza.getDirezioni();
+		List<String> dirtest = this.stanza.getDirezioni();
 		assertNotNull(dirtest);
-		assertTrue(dirtest.length==1);
-		assertEquals(dirtest[0],"est");
+		assertTrue(dirtest.size()==1);
+		assertEquals(dirtest.get(0),"est");
 	}
 	
 	@Test

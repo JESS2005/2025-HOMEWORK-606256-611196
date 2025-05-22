@@ -1,5 +1,7 @@
 package it.uniroma3.diadia.ambienti;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
@@ -138,12 +140,24 @@ public class Stanza {
 	}
 
 
-	public String[] getDirezioni() {
-		String[] direzioni = new String[this.stanzeAdiacenti.size()];
-		int i=0;
+	public List<String> getDirezioni() {
+		List<String> direzioni = new ArrayList<String>();
 		for (Map.Entry<String,Stanza> m : this.stanzeAdiacenti.entrySet())
-	    	direzioni[i++] = m.getKey();
+	    	direzioni.add(m.getKey());
 	    return direzioni;
     }
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this==obj)
+			return true;
+		
+		if (obj==null|| this.getClass()!=obj.getClass())
+			return false;
+		
+		Stanza altro= (Stanza) obj;
+		
+		return this.nome.equals(altro.getNome());
+	}
 
 }

@@ -58,7 +58,7 @@ public class testLabirintoBuilder {
 				.getLabirinto();
 		int size = monolocale.getStanzaIniziale().getAttrezzi().size();
 		assertTrue(size==1);
-		assertEquals(Arrays.asList(new Attrezzo("spada",1)),monolocale.getStanzaIniziale().getAttrezzi());
+		assertEquals(new Attrezzo("spada",1),monolocale.getStanzaIniziale().getAttrezzi().get("spada"));
 	}
 	
 	@Test

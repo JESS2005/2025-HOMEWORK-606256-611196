@@ -67,7 +67,7 @@ public class LabirintoBuilder {
 		return this;
 	}
 	
-	public LabirintoBuilder addStanzaBloccata(String stanza, String attrezzo, String direzione) {
+	public LabirintoBuilder addStanzaBloccata(String stanza, String direzione, String attrezzo) {
 		Stanza newstanza=new StanzaBloccata(stanza, attrezzo, direzione);
 		this.labirinto.addStanza(newstanza);
 		this.stanzaUltima=newstanza;
