@@ -4,6 +4,7 @@ import java.util.Map;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.Mago;
 
 public class Labirinto {
 	private Stanza stanzaVincente;
@@ -49,7 +50,8 @@ public class Labirinto {
 		laboratorio.impostaStanzaAdiacente("est", atrio);
 		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
 		biblioteca.impostaStanzaAdiacente("sud", atrio);
-
+		laboratorio.setPersonaggio(new Mago("Mago","String2",new Attrezzo("Bastone",2)));
+		
         /* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);

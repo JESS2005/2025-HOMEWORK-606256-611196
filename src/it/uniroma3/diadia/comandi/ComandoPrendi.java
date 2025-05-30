@@ -5,7 +5,7 @@ import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
-public class ComandoPrendi implements Comando {
+public class ComandoPrendi extends AbstractComando {
 	private String nome;
 
 	@Override
@@ -23,21 +23,6 @@ public class ComandoPrendi implements Comando {
 				stampe.mostraMessaggio("Niente " + nome);
 			}
 		}
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.nome = parametro;
-	}
-	
-	@Override
-	public String getParametro() {
-		return this.nome;
-	}
-	
-	@Override
-	public String getNome() {
-		return this.getClass().getName().substring(getClass().getName().indexOf("Comando")+7);
 	}
 
 }

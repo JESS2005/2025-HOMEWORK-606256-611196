@@ -62,8 +62,6 @@ public interface Comando {
     
     public String getParametro();
     
-    public default String getNome() {
-		return this.getClass().getName().substring(getClass().getName().indexOf("Comando")+7);
-	}
+    public String getNome();
     
 }

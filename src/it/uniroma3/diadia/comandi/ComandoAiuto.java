@@ -4,25 +4,29 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 
-public class ComandoAiuto implements Comando {
-	private String nome;
+public class ComandoAiuto extends AbstractComando {
+
 	@Override
 	public void esegui (Partita partita, IO stampe) {
 		String niente = "";
-		final String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa","guarda"};
+		final String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa","guarda", "regala", "interagisci","saluta"};
 		for(int i=0; i< elencoComandi.length; i++) 
 			niente += (elencoComandi[i]+" ");
 		stampe.mostraMessaggio(niente);
 	}
+	
+	/*
 	@Override
-	public void setParametro(String parametro) {
-		this.nome = parametro;
+	public void esegui (Partita partita, IO stampe) {
+		String niente = "";
+		final String[] elencoComandi = {"vai", "aiuto", "fine","prendi","posa","guarda", "regala"};
+		for(int i=0; i< elencoComandi.length; i++) 
+			niente += (elencoComandi[i]+" ");
+		stampe.mostraMessaggio(niente);
 	}
-
-	@Override
-	public String getParametro() {
-		return this.nome;
-	}
+	
+	*/
+	
 	
 	@Override
 	public String getNome() {
