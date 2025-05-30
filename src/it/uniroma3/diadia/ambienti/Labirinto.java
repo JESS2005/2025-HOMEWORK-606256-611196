@@ -12,8 +12,9 @@ public class Labirinto {
 	
 	
 	public Labirinto() {
-		creaStanze();
+		
 	}
+	
 	
 	public void addStanza (Stanza stanza) {
 		this.stanze.put(stanza.getNome(), stanza);
@@ -21,8 +22,9 @@ public class Labirinto {
 	
 	
 	
-	private void creaStanze() {
+	public static Labirinto labirintoBase() {
 
+		Labirinto lab=new Labirinto();
 		/* crea gli attrezzi */
     	Attrezzo lanterna = new Attrezzo("lanterna",3);
 		Attrezzo osso = new Attrezzo("osso",1);
@@ -53,8 +55,11 @@ public class Labirinto {
 		atrio.addAttrezzo(osso);
 
 		// il gioco comincia nell'atrio
-        stanzaIniziale = atrio;
-		stanzaVincente = biblioteca;
+		
+        lab.stanzaIniziale = atrio;
+		lab.stanzaVincente = biblioteca;
+		
+		return lab;
     }
 
 	public void setStanzaVincente(Stanza stanza) {

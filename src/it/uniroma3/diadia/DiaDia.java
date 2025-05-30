@@ -3,6 +3,7 @@ package it.uniroma3.diadia;
 
 
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
@@ -192,7 +193,9 @@ public class DiaDia {
 
 	public static void main(String[] argc) {
 		IO io= new IOConsole();
-		DiaDia gioco = new DiaDia(io);
+		LabirintoBuilder builder=new LabirintoBuilder();
+		Labirinto labirinto=Labirinto.labirintoBase();
+		DiaDia gioco = new DiaDia(labirinto,io);
 		gioco.gioca();
 		
 	}

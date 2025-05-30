@@ -6,6 +6,7 @@ import it.uniroma3.diadia.DiaDia;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IOSimulator;
+import it.uniroma3.diadia.ambienti.Labirinto;
 
 class testInteraPartita {
 	
@@ -23,7 +24,7 @@ class testInteraPartita {
 	void test1() {
 		String[] comandi= {"vai sud","prendi lanterna","vai nord","prendi osso","posa lanterna", "vai nord"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(io);
+		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
 		gioco.gioca();
 
 		String[] expected= {"ignora",
@@ -47,7 +48,7 @@ class testInteraPartita {
 	void testConChiusa() {
 		String[] comandi= {"prendi osso","vai sud","vai ovest","posa osso","vai ovest", "fine"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(io);
+		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
 		gioco.gioca();
 
 		String[] expected= {"ignora",
@@ -70,7 +71,7 @@ class testInteraPartita {
 	void testConBuia() {
 		String[] comandi= {"vai sud","prendi lanterna","vai est","posa lanterna","guarda", "fine"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(io);
+		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
 		gioco.gioca();
 	
 		String[] expected= {"ignora",
@@ -93,7 +94,7 @@ class testInteraPartita {
 	void testConMagica() {
 		String[] comandi= {"vai sud","prendi lanterna","vai est","vai est","posa lanterna","prendi lanterna","posa lanterna","prendi lanterna","posa lanterna","prendi lanterna","posa lanterna","prendi lanterna","prendi anretnal", "fine"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(io);
+		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
 		gioco.gioca();
 		
 		String[] expected= {"ignora",
