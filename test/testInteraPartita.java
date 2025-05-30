@@ -7,6 +7,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.IOSimulator;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 
 class testInteraPartita {
 	
@@ -24,11 +25,11 @@ class testInteraPartita {
 	void test1() {
 		String[] comandi= {"vai sud","prendi lanterna","vai nord","prendi osso","posa lanterna", "vai nord"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
+		DiaDia gioco = new DiaDia(LabirintoBuilder.labirintoBase().getLabirinto(),io);
 		gioco.gioca();
 
 		String[] expected= {"ignora",
-				"Aula N10\n"+ "Uscite: nord est ovest\n" + "Attrezzi nella stanza: lanterna (3kg)",
+				"Aula N10\n"+ "Uscite: nord est ovest\n" + "Attrezzi nella stanza: lanterna (3kg)\n"+"Vedi un Cane",
 				"Hai preso: lanterna",
 				"Atrio\n"+ "Uscite: nord sud est ovest\n"+ "Attrezzi nella stanza: osso (1kg)",
 				"Hai preso: osso",
@@ -48,15 +49,15 @@ class testInteraPartita {
 	void testConChiusa() {
 		String[] comandi= {"prendi osso","vai sud","vai ovest","posa osso","vai ovest", "fine"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
+		DiaDia gioco = new DiaDia(LabirintoBuilder.labirintoBase().getLabirinto(),io);
 		gioco.gioca();
 
 		String[] expected= {"ignora",
 				"ignora",
 				"ignora",
-				"Aula N10\n"+ "Uscite: nord est ovest\n" + "Attrezzi nella stanza: lanterna (3kg)",
+				"Aula N10\n"+ "Uscite: nord est ovest\n" + "Attrezzi nella stanza: lanterna (3kg)\n"+"Vedi un Cane",
 				"Hai posato: osso",
-				"Laboratorio Campus\n"+ "Uscite: est ovest\n"+ "Attrezzi nella stanza:",
+				"Laboratorio Campus\n"+ "Uscite: est ovest\n"+ "Attrezzi nella stanza:\nVedi un Mago",
 				"Grazie di aver giocato!"};
 		int i=0;
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
@@ -71,7 +72,7 @@ class testInteraPartita {
 	void testConBuia() {
 		String[] comandi= {"vai sud","prendi lanterna","vai est","posa lanterna","guarda", "fine"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
+		DiaDia gioco = new DiaDia(LabirintoBuilder.labirintoBase().getLabirinto(),io);
 		gioco.gioca();
 	
 		String[] expected= {"ignora",
@@ -79,7 +80,7 @@ class testInteraPartita {
 				"ignora",
 				"qui c'è buio pesto, devi portare: lanterna",
 				"ignora",
-				"Aula N11\n"+ "Uscite: est ovest\n"+ "Attrezzi nella stanza: lanterna (3kg)\n"+"CFU: 18\n"+"Borsa vuota",
+				"Aula N11\n"+ "Uscite: est ovest\n"+ "Attrezzi nella stanza: lanterna (3kg)\n"+"Vedi un Strega\n"+"CFU: 18\n"+"Borsa vuota",
 				"Grazie di aver giocato!"};
 		int i=0;
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
@@ -94,7 +95,7 @@ class testInteraPartita {
 	void testConMagica() {
 		String[] comandi= {"vai sud","prendi lanterna","vai est","vai est","posa lanterna","prendi lanterna","posa lanterna","prendi lanterna","posa lanterna","prendi lanterna","posa lanterna","prendi lanterna","prendi anretnal", "fine"};
 		IOSimulator io= new IOSimulator(comandi,40);
-		DiaDia gioco = new DiaDia(Labirinto.labirintoBase(),io);
+		DiaDia gioco = new DiaDia(LabirintoBuilder.labirintoBase().getLabirinto(),io);
 		gioco.gioca();
 		
 		String[] expected= {"ignora",

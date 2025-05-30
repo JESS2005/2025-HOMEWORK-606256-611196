@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.List;
+import java.util.SortedSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -65,5 +66,19 @@ public class testStanza {
 			assertTrue(this.stanza.addAttrezzo(new Attrezzo("testatt"+i, i)));
 		}
 		assertFalse(this.stanza.addAttrezzo(new Attrezzo("testatt10",1)));
+	}
+	
+	@Test
+	void testSortAdiacenti() {
+		Stanza ov=new Stanza("ovest");
+		this.stanza.impostaStanzaAdiacente("ovest", ov);
+		ov.addAttrezzo(new Attrezzo("a",1));
+		ov.addAttrezzo(new Attrezzo("b",1));
+		Stanza n=new Stanza("nord");
+		this.stanza.impostaStanzaAdiacente("nord", n);
+		n.addAttrezzo(new Attrezzo("c",1));
+		SortedSet<Stanza> ad=this.stanza.getStanzeAdiacentiPerAttrezzi();
+		assertEquals(new Stanza("est"),ad.getFirst());
+		assertEquals(new Stanza("ovest"),ad.getLast());
 	}
 }

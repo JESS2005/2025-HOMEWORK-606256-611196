@@ -23,21 +23,21 @@ public class Labirinto {
 	
 	
 	
-	public static Labirinto labirintoBase() {
+	/*public static Labirinto labirintoBase() {
 
 		Labirinto lab=new Labirinto();
-		/* crea gli attrezzi */
+		/* crea gli attrezzi
     	Attrezzo lanterna = new Attrezzo("lanterna",3);
 		Attrezzo osso = new Attrezzo("osso",1);
     	
-		/* crea stanze del labirinto */
+		/* crea stanze del labirinto
 		Stanza atrio = new Stanza("Atrio");
 		Stanza aulaN11 = new StanzaBuia("Aula N11");
 		Stanza aulaN10 = new StanzaBloccata("Aula N10","osso","ovest");
 		Stanza laboratorio = new StanzaMagica("Laboratorio Campus");
 		Stanza biblioteca = new Stanza("Biblioteca");
 		
-		/* collega le stanze */
+		/* collega le stanze
 		atrio.impostaStanzaAdiacente("nord", biblioteca);
 		atrio.impostaStanzaAdiacente("est", aulaN11);
 		atrio.impostaStanzaAdiacente("sud", aulaN10);
@@ -52,7 +52,7 @@ public class Labirinto {
 		biblioteca.impostaStanzaAdiacente("sud", atrio);
 		laboratorio.setPersonaggio(new Mago("Mago","String2",new Attrezzo("Bastone",2)));
 		
-        /* pone gli attrezzi nelle stanze */
+        /* pone gli attrezzi nelle stanze
 		aulaN10.addAttrezzo(lanterna);
 		atrio.addAttrezzo(osso);
 
@@ -62,7 +62,7 @@ public class Labirinto {
 		lab.stanzaVincente = biblioteca;
 		
 		return lab;
-    }
+    }*/
 
 	public void setStanzaVincente(Stanza stanza) {
 		this.stanzaVincente=stanza;

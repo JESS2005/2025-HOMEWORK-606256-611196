@@ -6,6 +6,7 @@ import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
+import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
@@ -21,7 +22,7 @@ public class testComandoPosa {
 	IO io;
 	@BeforeEach
 	void setUp() {
-		partita=new Partita(Labirinto.labirintoBase());
+		partita=new Partita(LabirintoBuilder.labirintoBase().getLabirinto());
 		comando1 = new ComandoPrendi();
 		comando2 = new ComandoPosa();
 		io=new IOConsole();

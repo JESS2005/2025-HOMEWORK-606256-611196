@@ -6,7 +6,7 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class ComandoPrendi extends AbstractComando {
-	private String nome;
+
 
 	@Override
 	public void esegui(Partita partita, IO stampe) {

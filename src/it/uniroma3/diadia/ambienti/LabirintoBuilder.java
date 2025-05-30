@@ -3,6 +3,10 @@ package it.uniroma3.diadia.ambienti;
 import java.util.Map;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
+import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
+import it.uniroma3.diadia.personaggi.Cane;
+import it.uniroma3.diadia.personaggi.Mago;
+import it.uniroma3.diadia.personaggi.Strega;
 
 public class LabirintoBuilder {
 	
@@ -50,8 +54,13 @@ public class LabirintoBuilder {
 		return this;
 	}
 	
-	public LabirintoBuilder addAdiacenza(String stanza1, String stanza2, String direzione) {
-		labirinto.getMappa().get(stanza1).impostaStanzaAdiacente(direzione, labirinto.getMappa().get(stanza2));
+	public LabirintoBuilder addAdiacenza(String da, String a, String direzione) {
+		labirinto.getMappa().get(da).impostaStanzaAdiacente(direzione, labirinto.getMappa().get(a));
+		return this;
+	}
+	
+	public LabirintoBuilder addAdiacenza(String a, String direzione) {
+		stanzaUltima.impostaStanzaAdiacente(direzione, labirinto.getMappa().get(a));
 		return this;
 	}
 	
@@ -81,8 +90,26 @@ public class LabirintoBuilder {
 		return this;
 	}
 	
+	public LabirintoBuilder addPersonaggio(AbstractPersonaggio pers) {
+		stanzaUltima.setPersonaggio(pers);
+		return this;
+	}
+	
 	public Map<String, Stanza> getMappaStanze() {
 		return this.labirinto.getMappa();
-		}
+	}
+	
+	public static LabirintoBuilder labirintoBase() {
+		LabirintoBuilder lab=new LabirintoBuilder();
+		lab.addStanzaIniziale("Atrio").addAttrezzo("osso",1).addStanzaMagica("Laboratorio Campus",3).addPersonaggio(new Mago("Mago","Ciao",new Attrezzo("Bastone",2)))
+		.addStanzaBloccata("Aula N10","ovest","osso").addPersonaggio(new Cane("Cane","Miao")).addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna").addPersonaggio(new Strega("Strega","你好"))
+		.addAdiacenza("Atrio", "Biblioteca", "nord").addAdiacenza("Atrio", "Aula N11", "est").addAdiacenza("Atrio", "Aula N10", "sud").addAdiacenza("Atrio", "Laboratorio Campus", "ovest")
+		.addAdiacenza("Aula N11", "Laboratorio Campus", "est").addAdiacenza("Aula N11", "Atrio", "ovest")
+		.addAdiacenza("Aula N10", "Aula N11", "est").addAdiacenza("Aula N10", "Laboratorio Campus", "ovest").addAdiacenza("Aula N10", "Atrio", "nord")
+		.addAdiacenza("Laboratorio Campus","Atrio", "est").addAdiacenza("Laboratorio Campus","Aula N11", "ovest")
+		.addAdiacenza("Biblioteca","Atrio", "sud");
+
+		return lab;
+	}
 	
 }

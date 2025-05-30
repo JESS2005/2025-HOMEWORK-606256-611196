@@ -194,7 +194,7 @@ public class DiaDia {
 	public static void main(String[] argc) {
 		IO io= new IOConsole();
 		LabirintoBuilder builder=new LabirintoBuilder();
-		Labirinto labirinto=Labirinto.labirintoBase();
+		Labirinto labirinto=LabirintoBuilder.labirintoBase().getLabirinto();
 		DiaDia gioco = new DiaDia(labirinto,io);
 		gioco.gioca();
 		

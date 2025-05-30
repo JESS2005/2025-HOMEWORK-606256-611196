@@ -1,9 +1,13 @@
 package it.uniroma3.diadia.ambienti;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
@@ -166,6 +170,26 @@ public class Stanza {
 
 	public AbstractPersonaggio getPersonaggio() {
 		return this.personaggio;
+	}
+
+	public SortedSet<Stanza> getStanzeAdiacentiPerAttrezzi() {
+
+		class ComparatorePerAtt implements Comparator<Stanza> {
+			@Override
+			public int compare(Stanza s1, Stanza s2) {
+				return s1.getAttrezzi().size()-s2.getAttrezzi().size();
+			}
+		}
+
+		SortedSet<Stanza> ad=new TreeSet<Stanza>(new ComparatorePerAtt());
+		List<Stanza> temp=new ArrayList<Stanza>(stanzeAdiacenti.values());
+		Collections.shuffle(temp); //randomizziamo per quando più stanze hanno gli stessi attrezzi
+		ad.addAll(temp);
+		return ad;
+	}
+	
+	public Map<String, Stanza> getMappaAdiacenti() {
+		return stanzeAdiacenti;
 	}
 
 	@Override
