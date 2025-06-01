@@ -22,7 +22,7 @@ public class testComandoPosa {
 	IO io;
 	@BeforeEach
 	void setUp() {
-		partita=new Partita(LabirintoBuilder.labirintoBase().getLabirinto());
+		partita=new Partita(LabirintoBuilder.labirintoTest().getLabirinto());
 		comando1 = new ComandoPrendi();
 		comando2 = new ComandoPosa();
 		io=new IOConsole();

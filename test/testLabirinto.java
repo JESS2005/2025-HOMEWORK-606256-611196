@@ -11,7 +11,7 @@ public class testLabirinto {
 	private Labirinto labirinto;
 	@BeforeEach
 	void setUp() {
-		this.labirinto=LabirintoBuilder.labirintoBase().getLabirinto();
+		this.labirinto=LabirintoBuilder.labirintoTest().getLabirinto();
 	}
 	
 	@Test

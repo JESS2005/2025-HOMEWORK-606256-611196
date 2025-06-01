@@ -99,6 +99,19 @@ public class LabirintoBuilder {
 		return this.labirinto.getMappa();
 	}
 	
+	public static LabirintoBuilder labirintoTest() {
+		LabirintoBuilder lab=new LabirintoBuilder();
+		lab.addStanzaIniziale("Atrio").addAttrezzo("osso",1).addStanzaMagica("Laboratorio Campus",3)
+		.addStanzaBloccata("Aula N10","ovest","osso").addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna")
+		.addAdiacenza("Atrio", "Biblioteca", "nord").addAdiacenza("Atrio", "Aula N11", "est").addAdiacenza("Atrio", "Aula N10", "sud").addAdiacenza("Atrio", "Laboratorio Campus", "ovest")
+		.addAdiacenza("Aula N11", "Laboratorio Campus", "est").addAdiacenza("Aula N11", "Atrio", "ovest")
+		.addAdiacenza("Aula N10", "Aula N11", "est").addAdiacenza("Aula N10", "Laboratorio Campus", "ovest").addAdiacenza("Aula N10", "Atrio", "nord")
+		.addAdiacenza("Laboratorio Campus","Atrio", "est").addAdiacenza("Laboratorio Campus","Aula N11", "ovest")
+		.addAdiacenza("Biblioteca","Atrio", "sud");
+
+		return lab;
+	}
+	
 	public static LabirintoBuilder labirintoBase() {
 		LabirintoBuilder lab=new LabirintoBuilder();
 		lab.addStanzaIniziale("Atrio").addAttrezzo("osso",1).addStanzaMagica("Laboratorio Campus",3).addPersonaggio(new Mago("Mago","Ciao",new Attrezzo("Bastone",2)))

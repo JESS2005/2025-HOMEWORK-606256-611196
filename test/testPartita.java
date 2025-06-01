@@ -12,7 +12,7 @@ public class testPartita {
 	private Partita partita;
 	@BeforeEach
 	void setUp() {
-		this.partita=new Partita(LabirintoBuilder.labirintoBase().getLabirinto());
+		this.partita=new Partita(LabirintoBuilder.labirintoTest().getLabirinto());
 	}
 	
 	

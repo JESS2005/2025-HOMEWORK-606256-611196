@@ -19,7 +19,7 @@ public class testComandoVai {
 	IO io;
 	@BeforeEach
 	void setUp() {
-		partita=new Partita(LabirintoBuilder.labirintoBase().getLabirinto());
+		partita=new Partita(LabirintoBuilder.labirintoTest().getLabirinto());
 		comando = new ComandoVai();
 		io=new IOConsole();
 	}
