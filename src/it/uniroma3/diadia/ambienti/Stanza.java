@@ -123,7 +123,7 @@ public class Stanza {
 		for (Map.Entry<String, Attrezzo> m : this.attrezzi.entrySet())
 			risultato.append(" " + m.getValue().toString());
 		if (personaggio!=null)
-			risultato.append("\nVedi un "+personaggio.getNome());
+			risultato.append("\nVedi un "+personaggio.getClass().getSimpleName());
 		return risultato.toString();
 	}
 

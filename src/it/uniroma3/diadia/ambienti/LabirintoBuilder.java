@@ -114,8 +114,8 @@ public class LabirintoBuilder {
 	
 	public static LabirintoBuilder labirintoBase() {
 		LabirintoBuilder lab=new LabirintoBuilder();
-		lab.addStanzaIniziale("Atrio").addAttrezzo("osso",1).addStanzaMagica("Laboratorio Campus",3).addPersonaggio(new Mago("Mago","Ciao",new Attrezzo("Bastone",2)))
-		.addStanzaBloccata("Aula N10","ovest","osso").addPersonaggio(new Cane("Cane","Miao")).addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna").addPersonaggio(new Strega("Strega","你好"))
+		lab.addStanzaIniziale("Atrio").addAttrezzo("osso",1).addStanzaMagica("Laboratorio Campus",3).addPersonaggio(new Mago("Merlone il mago burlone","Ciao",new Attrezzo("Bastone",2)))
+		.addStanzaBloccata("Aula N10","ovest","osso").addPersonaggio(new Cane("cane magico","Miao")).addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna").addPersonaggio(new Strega("Amelia la strega","你好"))
 		.addAdiacenza("Atrio", "Biblioteca", "nord").addAdiacenza("Atrio", "Aula N11", "est").addAdiacenza("Atrio", "Aula N10", "sud").addAdiacenza("Atrio", "Laboratorio Campus", "ovest")
 		.addAdiacenza("Aula N11", "Laboratorio Campus", "est").addAdiacenza("Aula N11", "Atrio", "ovest")
 		.addAdiacenza("Aula N10", "Aula N11", "est").addAdiacenza("Aula N10", "Laboratorio Campus", "ovest").addAdiacenza("Aula N10", "Atrio", "nord")
