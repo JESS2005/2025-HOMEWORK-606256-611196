@@ -26,4 +26,12 @@ public class Mago extends AbstractPersonaggio {
 		}
 		return msg;
 	}
+	
+	@Override
+	public String riceviRegalo (Attrezzo attrezzo, Partita partita) {
+		int peso=attrezzo.getPeso()/2;
+		Attrezzo nuovo=new Attrezzo(attrezzo.getNome(), peso);
+		partita.getStanzaCorrente().addAttrezzo(nuovo);
+		return "il tuo "+nuovo.getNome()+ " fa schifo!!!";
+	}
 }

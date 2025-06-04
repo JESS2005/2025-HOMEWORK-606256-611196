@@ -14,4 +14,17 @@ public class Cane extends AbstractPersonaggio {
 		partita.getGiocatore().setCfu(partita.getGiocatore().getCfu()-1);
 		return MESSAGGIO_MORSO+partita.getGiocatore().getCfu();
 	}
+	
+	@Override
+	public String riceviRegalo (Attrezzo attrezzo, Partita partita) {
+		if(attrezzo.getNome().equals("osso")) {
+			Attrezzo nuovo=new Attrezzo("palla", 3);
+			partita.getStanzaCorrente().addAttrezzo(nuovo);
+			return "chip chip";
+		} else {
+			int cfu=partita.getGiocatore().getCfu();
+			partita.getGiocatore().setCfu(--cfu);
+			return "ROOOAAARR!!!";
+		}
+	}
 }

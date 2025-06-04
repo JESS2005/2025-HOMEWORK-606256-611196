@@ -17,7 +17,6 @@ public class ComandoSaluta extends AbstractComando {
 		personaggio = partita.getStanzaCorrente().getPersonaggio();
 		if (personaggio != null) {
 			io.mostraMessaggio(personaggio.saluta());
-
 		} else
 			io.mostraMessaggio(MESSAGGIO_CON_CHI);
 	}

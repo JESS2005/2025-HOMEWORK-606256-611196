@@ -16,11 +16,16 @@ public class Strega extends AbstractPersonaggio {
 	@Override
 	public String agisci(Partita partita) {
 		SortedSet<Stanza> ad=partita.getStanzaCorrente().getStanzeAdiacentiPerAttrezzi();
-		Stanza fin=ad.getFirst();
+		Stanza fin=ad.first();
 		if (this.haSalutato()) {
-			fin=ad.getLast();
+			fin=ad.last();
 		}
 		partita.setStanzaCorrente(fin);
 		return MESSAGGIO_TP1+fin.getNome()+MESSAGGIO_TP2;
+	}
+	
+	@Override
+	public String riceviRegalo (Attrezzo attrezzo, Partita partita) {
+		return "AAAAAHAHAHAGHAGSHAGHOHOHOHOHOOH!!!!!!";
 	}
 }
