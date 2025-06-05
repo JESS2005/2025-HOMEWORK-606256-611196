@@ -4,9 +4,13 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Cane extends AbstractPersonaggio {
+	Attrezzo att;
+	String cibo;
 	private static final String MESSAGGIO_MORSO = "Il cane ti rapina, ti prende un CFU, te ne rimangono ";
-	public Cane(String nome, String presentazione) {
+	public Cane(String nome, String presentazione,String cibo,Attrezzo att) {
 		super(nome, presentazione);
+		this.att=att;
+		this.cibo=cibo;
 	}
 
 	@Override
@@ -17,9 +21,8 @@ public class Cane extends AbstractPersonaggio {
 	
 	@Override
 	public String riceviRegalo (Attrezzo attrezzo, Partita partita) {
-		if(attrezzo.getNome().equals("osso")) {
-			Attrezzo nuovo=new Attrezzo("palla", 3);
-			partita.getStanzaCorrente().addAttrezzo(nuovo);
+		if(attrezzo.getNome().equals(cibo)) {
+			partita.getStanzaCorrente().addAttrezzo(att);
 			return "chip chip";
 		} else {
 			int cfu=partita.getGiocatore().getCfu();
