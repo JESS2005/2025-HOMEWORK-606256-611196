@@ -29,9 +29,9 @@ class testInteraPartita {
 		gioco.gioca();
 
 		String[] expected= {"ignora",
-				"Aula N10\n"+ "Uscite: nord est ovest\n" + "Attrezzi nella stanza: lanterna (3kg)",
+				"Aula N10\n"+ "Uscite: est nord ovest\n" + "Attrezzi nella stanza: lanterna (3kg)",
 				"Hai preso: lanterna",
-				"Atrio\n"+ "Uscite: nord sud est ovest\n"+ "Attrezzi nella stanza: osso (1kg)",
+				"Atrio\n"+ "Uscite: nord est ovest sud\n"+ "Attrezzi nella stanza: osso (1kg)",
 				"Hai preso: osso",
 				"Hai posato: lanterna",
 				"ignora",
@@ -40,7 +40,7 @@ class testInteraPartita {
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
 			
 			if (!("ignora".equals(expected[i])))
-				assertEquals(expected[i],io.getLetti()[i]);
+				assertEquals(expected[i],io.getLetti()[i],i+" ");
 			i++;
 		}
 	}
@@ -55,7 +55,7 @@ class testInteraPartita {
 		String[] expected= {"ignora",
 				"ignora",
 				"ignora",
-				"Aula N10\n"+ "Uscite: nord est ovest\n" + "Attrezzi nella stanza: lanterna (3kg)",
+				"Aula N10\n"+ "Uscite: est nord ovest\n" + "Attrezzi nella stanza: lanterna (3kg)",
 				"Hai posato: osso",
 				"Laboratorio Campus\n"+ "Uscite: est ovest\n"+ "Attrezzi nella stanza:",
 				"Grazie di aver giocato!"};
@@ -63,7 +63,7 @@ class testInteraPartita {
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
 			
 			if (!("ignora".equals(expected[i])))
-				assertEquals(expected[i],io.getLetti()[i]);
+				assertEquals(expected[i],io.getLetti()[i],i+" ");
 			i++;
 		}
 	}
@@ -86,7 +86,7 @@ class testInteraPartita {
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
 			
 			if (!("ignora".equals(expected[i])))
-				assertEquals(expected[i],io.getLetti()[i]);
+				assertEquals(expected[i],io.getLetti()[i],i+" ");
 			i++;
 		}
 	}		
@@ -117,7 +117,7 @@ class testInteraPartita {
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
 			
 			if (!("ignora".equals(expected[i])))
-				assertEquals(expected[i],io.getLetti()[i]);
+				assertEquals(expected[i],io.getLetti()[i],i+" ");
 			i++;
 		}
 	}

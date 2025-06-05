@@ -1,0 +1,6 @@
+Stanze:N10,Biblioteca
+Stanze buie:Sgabuzzino lanterna
+Inizio:N10
+Vincente:Biblioteca
+Attrezzi:Osso 5 N10,lanterna 2 N10
+Uscite:N10 nord Biblioteca,Biblioteca sud N10,Sgabuzzino est N10,N10 ovest Sgabuzzino

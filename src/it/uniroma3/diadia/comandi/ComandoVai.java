@@ -3,6 +3,7 @@ package it.uniroma3.diadia.comandi;
 import it.uniroma3.diadia.IO;
 import it.uniroma3.diadia.IOConsole;
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class ComandoVai extends AbstractComando {
@@ -12,7 +13,7 @@ public class ComandoVai extends AbstractComando {
 		Stanza prossimaStanza = null;
 		if(nome==null)
 			stampe.mostraMessaggio("Dove vuoi andare ?");
-		prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(nome);
+		prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(Direzione.valueOf(nome.toUpperCase()));
 		if (prossimaStanza == null)
 			stampe.mostraMessaggio("Direzione inesistente");
 		else {

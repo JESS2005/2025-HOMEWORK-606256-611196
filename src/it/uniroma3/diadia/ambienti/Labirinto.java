@@ -2,6 +2,7 @@ package it.uniroma3.diadia.ambienti;
 import java.util.HashMap;
 import java.util.Map;
 
+import it.uniroma3.diadia.CaricatoreLabirinto;
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.Mago;
@@ -15,10 +16,15 @@ public class Labirinto {
 	public Labirinto() {
 		
 	}
+
 	
 	
 	public void addStanza (Stanza stanza) {
 		this.stanze.put(stanza.getNome(), stanza);
+	}
+	
+	public void setMappaStanze(Map<String, Stanza> stanze) {
+		this.stanze=stanze;
 	}
 	
 	

@@ -6,6 +6,7 @@ import java.util.SortedSet;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
@@ -15,7 +16,7 @@ public class testStanza {
 	@BeforeEach
 	void setUp() {
 		this.stanza=new Stanza("test");
-		this.stanza.impostaStanzaAdiacente("est", new Stanza("est"));
+		this.stanza.impostaStanzaAdiacente(Direzione.EST, new Stanza("est"));
 		this.stanza.addAttrezzo(new Attrezzo("testatt", 2));
 	}
 	
@@ -71,14 +72,14 @@ public class testStanza {
 	@Test
 	void testSortAdiacenti() {
 		Stanza ov=new Stanza("ovest");
-		this.stanza.impostaStanzaAdiacente("ovest", ov);
+		this.stanza.impostaStanzaAdiacente(Direzione.OVEST, ov);
 		ov.addAttrezzo(new Attrezzo("a",1));
 		ov.addAttrezzo(new Attrezzo("b",1));
 		Stanza n=new Stanza("nord");
-		this.stanza.impostaStanzaAdiacente("nord", n);
+		this.stanza.impostaStanzaAdiacente(Direzione.NORD, n);
 		n.addAttrezzo(new Attrezzo("c",1));
 		SortedSet<Stanza> ad=this.stanza.getStanzeAdiacentiPerAttrezzi();
-		assertEquals(new Stanza("est"),ad.getFirst());
-		assertEquals(new Stanza("ovest"),ad.getLast());
+		assertEquals(new Stanza("est"),ad.first());
+		assertEquals(new Stanza("ovest"),ad.last());
 	}
 }

@@ -32,7 +32,7 @@ public class Stanza {
 
 	private Map<String, Attrezzo> attrezzi = new HashMap<String, Attrezzo>();
 
-	private Map<String, Stanza> stanzeAdiacenti = new HashMap<String, Stanza>();
+	private Map<Direzione, Stanza> stanzeAdiacenti = new HashMap<Direzione, Stanza>();
 
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -50,7 +50,7 @@ public class Stanza {
 	 * @param stanza    stanza adiacente nella direzione indicata dal primo
 	 *                  parametro.
 	 */
-	public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
+	public void impostaStanzaAdiacente(Direzione direzione, Stanza stanza) {
 		this.stanzeAdiacenti.put(direzione, stanza);
 	}
 
@@ -59,7 +59,7 @@ public class Stanza {
 	 * 
 	 * @param direzione
 	 */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		return this.stanzeAdiacenti.get(direzione);
 	}
 
@@ -117,8 +117,8 @@ public class Stanza {
 		StringBuilder risultato = new StringBuilder();
 		risultato.append(this.nome);
 		risultato.append("\nUscite:");
-		for (Map.Entry<String, Stanza> m : this.stanzeAdiacenti.entrySet())
-			risultato.append(" " + m.getKey());
+		for (Map.Entry<Direzione, Stanza> m : this.stanzeAdiacenti.entrySet())
+			risultato.append(" " + m.getKey().toString().toLowerCase());
 		risultato.append("\nAttrezzi nella stanza:");
 		for (Map.Entry<String, Attrezzo> m : this.attrezzi.entrySet())
 			risultato.append(" " + m.getValue().toString());
@@ -159,8 +159,8 @@ public class Stanza {
 
 	public List<String> getDirezioni() {
 		List<String> direzioni = new ArrayList<String>();
-		for (Map.Entry<String, Stanza> m : this.stanzeAdiacenti.entrySet())
-			direzioni.add(m.getKey());
+		for (Map.Entry<Direzione, Stanza> m : this.stanzeAdiacenti.entrySet())
+			direzioni.add(m.getKey().toString());
 		return direzioni;
 	}
 
@@ -188,7 +188,7 @@ public class Stanza {
 		return ad;
 	}
 	
-	public Map<String, Stanza> getMappaAdiacenti() {
+	public Map<Direzione, Stanza> getMappaAdiacenti() {
 		return stanzeAdiacenti;
 	}
 

@@ -1,5 +1,7 @@
 package it.uniroma3.diadia;
 
+import java.io.FileNotFoundException;
+
 import it.uniroma3.diadia.ambienti.Labirinto;
 import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
@@ -33,8 +35,7 @@ public class DiaDia {
 			+ "o regalarli se pensi che possano ingraziarti qualcuno.\n\n"
 			+ "Per conoscere le istruzioni usa il comando 'aiuto'.";
 
-	static final private String[] elencoComandi = { "vai", "aiuto", "fine", "prendi", "posa", "guarda" };
-
+	
 	private Partita partita;
 	private FabbricaDiComandi factory;
 
@@ -112,32 +113,8 @@ public class DiaDia {
 	/**
 	 * Stampa informazioni di aiuto.
 	 */
-	private void aiuto() {
-		String niente = "";
-		for (int i = 0; i < elencoComandi.length; i++)
-			niente += (elencoComandi[i] + " ");
-		this.stampe.mostraMessaggio(niente);
-	}
 
-	/**
-	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra e ne stampa il
-	 * nome, altrimenti stampa un messaggio di errore
-	 */
-	private void vai(String direzione) {
-		if (direzione == null)
-			this.stampe.mostraMessaggio("Dove vuoi andare ?");
-		Stanza prossimaStanza = null;
-		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
-		if (prossimaStanza == null)
-			this.stampe.mostraMessaggio("Direzione inesistente");
-		else {
-			this.partita.setStanzaCorrente(prossimaStanza);
-			int cfu = this.partita.getGiocatore().getCfu();
-			// this.stampe.mostraMessaggio(partita.getGiocatore().getCfu());
-			this.partita.getGiocatore().setCfu(--cfu);
-		}
-		this.stampe.mostraMessaggio(partita.getStanzaCorrente().getDescrizione());
-	}
+
 
 	/**
 	 * Comando "Fine".
@@ -178,10 +155,13 @@ public class DiaDia {
 		}
 	}
 
-	public static void main(String[] argc) {
+	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException {
 		IO io = new IOConsole();
-		LabirintoBuilder builder = new LabirintoBuilder();
-		Labirinto labirinto = LabirintoBuilder.labirintoBase().getLabirinto();
+		CaricatoreLabirinto CarLab= new CaricatoreLabirinto("labirinti/Lab.txt");
+		CarLab.carica();
+		LabirintoBuilder builder = new LabirintoBuilder(CarLab);
+		Labirinto labirinto=builder.getLabirinto();
+		//Labirinto labirinto = LabirintoBuilder.labirintoBase().getLabirinto();
 		DiaDia gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
 

@@ -2,6 +2,7 @@ package it.uniroma3.diadia.ambienti;
 
 import java.util.Map;
 
+import it.uniroma3.diadia.CaricatoreLabirinto;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Cane;
@@ -15,6 +16,13 @@ public class LabirintoBuilder {
 	
 	public LabirintoBuilder() {
 		this.labirinto=new Labirinto();
+	}
+	
+	public LabirintoBuilder(CaricatoreLabirinto car) {
+		this.labirinto=new Labirinto();
+		this.labirinto.setStanzaIniziale(car.getStanzaIniziale());
+		this.labirinto.setStanzaVincente(car.getStanzaVincente());
+		this.labirinto.setMappaStanze(car.getMappaStanze());
 	}
 	
 	public LabirintoBuilder addStanza(String stanza) {
@@ -54,12 +62,12 @@ public class LabirintoBuilder {
 		return this;
 	}
 	
-	public LabirintoBuilder addAdiacenza(String da, String a, String direzione) {
+	public LabirintoBuilder addAdiacenza(String da, String a, Direzione direzione) {
 		labirinto.getMappa().get(da).impostaStanzaAdiacente(direzione, labirinto.getMappa().get(a));
 		return this;
 	}
 	
-	public LabirintoBuilder addAdiacenza(String a, String direzione) {
+	public LabirintoBuilder addAdiacenza(String a, Direzione direzione) {
 		stanzaUltima.impostaStanzaAdiacente(direzione, labirinto.getMappa().get(a));
 		return this;
 	}
@@ -76,8 +84,8 @@ public class LabirintoBuilder {
 		return this;
 	}
 	
-	public LabirintoBuilder addStanzaBloccata(String stanza, String direzione, String attrezzo) {
-		Stanza newstanza=new StanzaBloccata(stanza, attrezzo, direzione);
+	public LabirintoBuilder addStanzaBloccata(String stanza, Direzione ovest, String attrezzo) {
+		Stanza newstanza=new StanzaBloccata(stanza, attrezzo, ovest);
 		this.labirinto.addStanza(newstanza);
 		this.stanzaUltima=newstanza;
 		return this;
@@ -102,12 +110,12 @@ public class LabirintoBuilder {
 	public static LabirintoBuilder labirintoTest() {
 		LabirintoBuilder lab=new LabirintoBuilder();
 		lab.addStanzaIniziale("Atrio").addAttrezzo("osso",1).addStanzaMagica("Laboratorio Campus",3)
-		.addStanzaBloccata("Aula N10","ovest","osso").addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna")
-		.addAdiacenza("Atrio", "Biblioteca", "nord").addAdiacenza("Atrio", "Aula N11", "est").addAdiacenza("Atrio", "Aula N10", "sud").addAdiacenza("Atrio", "Laboratorio Campus", "ovest")
-		.addAdiacenza("Aula N11", "Laboratorio Campus", "est").addAdiacenza("Aula N11", "Atrio", "ovest")
-		.addAdiacenza("Aula N10", "Aula N11", "est").addAdiacenza("Aula N10", "Laboratorio Campus", "ovest").addAdiacenza("Aula N10", "Atrio", "nord")
-		.addAdiacenza("Laboratorio Campus","Atrio", "est").addAdiacenza("Laboratorio Campus","Aula N11", "ovest")
-		.addAdiacenza("Biblioteca","Atrio", "sud");
+		.addStanzaBloccata("Aula N10",Direzione.OVEST,"osso").addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna")
+		.addAdiacenza("Atrio", "Biblioteca", Direzione.NORD).addAdiacenza("Atrio", "Aula N11", Direzione.EST).addAdiacenza("Atrio", "Aula N10", Direzione.SUD).addAdiacenza("Atrio", "Laboratorio Campus", Direzione.OVEST)
+		.addAdiacenza("Aula N11", "Laboratorio Campus", Direzione.EST).addAdiacenza("Aula N11", "Atrio", Direzione.OVEST)
+		.addAdiacenza("Aula N10", "Aula N11", Direzione.EST).addAdiacenza("Aula N10", "Laboratorio Campus", Direzione.OVEST).addAdiacenza("Aula N10", "Atrio", Direzione.NORD)
+		.addAdiacenza("Laboratorio Campus","Atrio", Direzione.EST).addAdiacenza("Laboratorio Campus","Aula N11", Direzione.OVEST)
+		.addAdiacenza("Biblioteca","Atrio", Direzione.SUD);
 
 		return lab;
 	}
@@ -115,12 +123,12 @@ public class LabirintoBuilder {
 	public static LabirintoBuilder labirintoBase() {
 		LabirintoBuilder lab=new LabirintoBuilder();
 		lab.addStanzaIniziale("Atrio").addAttrezzo("osso",1).addStanzaMagica("Laboratorio Campus",3).addPersonaggio(new Mago("Merlone il mago burlone","Ciao",new Attrezzo("Bastone",2)))
-		.addStanzaBloccata("Aula N10","ovest","osso").addPersonaggio(new Cane("cane magico","Miao")).addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna").addPersonaggio(new Strega("Amelia la strega","你好"))
-		.addAdiacenza("Atrio", "Biblioteca", "nord").addAdiacenza("Atrio", "Aula N11", "est").addAdiacenza("Atrio", "Aula N10", "sud").addAdiacenza("Atrio", "Laboratorio Campus", "ovest")
-		.addAdiacenza("Aula N11", "Laboratorio Campus", "est").addAdiacenza("Aula N11", "Atrio", "ovest")
-		.addAdiacenza("Aula N10", "Aula N11", "est").addAdiacenza("Aula N10", "Laboratorio Campus", "ovest").addAdiacenza("Aula N10", "Atrio", "nord")
-		.addAdiacenza("Laboratorio Campus","Atrio", "est").addAdiacenza("Laboratorio Campus","Aula N11", "ovest")
-		.addAdiacenza("Biblioteca","Atrio", "sud");
+		.addStanzaBloccata("Aula N10",Direzione.OVEST,"osso").addPersonaggio(new Cane("cane magico","Miao")).addAttrezzo("lanterna",3).addStanzaVincente("Biblioteca").addStanzaBuia("Aula N11","lanterna").addPersonaggio(new Strega("Amelia la strega","你好"))
+		.addAdiacenza("Atrio", "Biblioteca", Direzione.NORD).addAdiacenza("Atrio", "Aula N11", Direzione.EST).addAdiacenza("Atrio", "Aula N10", Direzione.SUD).addAdiacenza("Atrio", "Laboratorio Campus", Direzione.OVEST)
+		.addAdiacenza("Aula N11", "Laboratorio Campus", Direzione.EST).addAdiacenza("Aula N11", "Atrio", Direzione.OVEST)
+		.addAdiacenza("Aula N10", "Aula N11", Direzione.EST).addAdiacenza("Aula N10", "Laboratorio Campus", Direzione.OVEST).addAdiacenza("Aula N10", "Atrio", Direzione.NORD)
+		.addAdiacenza("Laboratorio Campus","Atrio", Direzione.EST).addAdiacenza("Laboratorio Campus","Aula N11", Direzione.OVEST)
+		.addAdiacenza("Biblioteca","Atrio", Direzione.SUD);
 
 		return lab;
 	}
