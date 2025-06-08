@@ -65,6 +65,11 @@ public class CaricatoreLabirinto {
 		this.reader = new LineNumberReader(new FileReader(nomeFile));
 	}
 
+	public CaricatoreLabirinto(Reader reader) throws FileNotFoundException {
+		this.nome2stanza = new HashMap<String, Stanza>();
+		this.reader = new LineNumberReader(reader);
+	}
+
 	public void carica() throws FormatoFileNonValidoException {
 		try {
 			this.leggiECreaStanze();
@@ -89,6 +94,9 @@ public class CaricatoreLabirinto {
 	private String leggiRigaCheCominciaPer(String marker) throws FormatoFileNonValidoException {
 		try {
 			String riga = this.reader.readLine();
+			if (riga==null || riga.equals("")) {
+				return "test";
+			}
 			check(riga.startsWith(marker), "era attesa una riga che cominciasse per " + marker);
 			return riga.substring(marker.length());
 		} catch (IOException e) {
@@ -99,6 +107,7 @@ public class CaricatoreLabirinto {
 	private void leggiECreaStanze() throws FormatoFileNonValidoException {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZE_MARKER);
 		for (String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
+			if (nomeStanza.equals("")) return;
 			Stanza stanza = new Stanza(nomeStanza);
 			this.nome2stanza.put(nomeStanza, stanza);
 		}
@@ -107,7 +116,8 @@ public class CaricatoreLabirinto {
 	private void leggiECreaStanzeBuie() throws FormatoFileNonValidoException {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZEBUIE_MARKER);
 		for (String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
-			String[] p2 = nomeStanza.split(" ");
+			if (nomeStanza.equals("")) return;
+			String[] p2 = nomeStanza.split("-");
 			Stanza stanza = new StanzaBuia(p2[0], p2[1]);
 			this.nome2stanza.put(p2[0], stanza);
 		}
@@ -116,7 +126,8 @@ public class CaricatoreLabirinto {
 	private void leggiECreaStanzeMagiche() throws FormatoFileNonValidoException {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZEMAGICHE_MARKER);
 		for (String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
-			String[] p2 = nomeStanza.split(" ");
+			if (nomeStanza.equals("")) return;
+			String[] p2 = nomeStanza.split("-");
 			Stanza stanza = new StanzaMagica(p2[0], Integer.parseInt(p2[1]));
 			this.nome2stanza.put(p2[0], stanza);
 		}
@@ -125,28 +136,31 @@ public class CaricatoreLabirinto {
 	private void leggiECreaStanzeBloccate() throws FormatoFileNonValidoException {
 		String nomiStanze = this.leggiRigaCheCominciaPer(STANZEBLOCCATE_MARKER);
 		for (String nomeStanza : separaStringheAlleVirgole(nomiStanze)) {
-			String[] p2 = nomeStanza.split(" ");
+			if (nomeStanza.equals("")) return;
+			String[] p2 = nomeStanza.split("-");
 			Stanza stanza = new StanzaBloccata(p2[0], p2[1], Direzione.valueOf(p2[2].toUpperCase()));
 			this.nome2stanza.put(p2[0], stanza);
 		}
 	}
 
-	private void leggiECreaPersonaggi() throws FormatoFileNonValidoException  {
+	private void leggiECreaPersonaggi() throws FormatoFileNonValidoException {
 		String nomiPersonaggi = this.leggiRigaCheCominciaPer(PERSONAGGI_MARKER);
-		for(String nomePersonaggio : separaStringheAlleVirgole(nomiPersonaggi)) {
+		for (String nomePersonaggio : separaStringheAlleVirgole(nomiPersonaggi)) {
+			if (nomePersonaggio.equals("")) return;
 			String[] p2 = nomePersonaggio.split("-");
 			AbstractPersonaggio personaggio = null;
-			if(p2[0].equals("Mago")) {
-				personaggio= new Mago(p2[2], p2[3], new Attrezzo(p2[4],Integer.parseInt(p2[5])));
-				
-			} else if(p2[0].equals("Strega")) {
-				personaggio= new Strega(p2[2], p2[3]);				
-			} else if(p2[0].equals("Cane")) {
-				personaggio= new Cane(p2[2], p2[3],p2[4], new Attrezzo(p2[5],Integer.parseInt(p2[6])));
+			if (p2[0].equals("Mago")) {
+				personaggio = new Mago(p2[2], p2[3], new Attrezzo(p2[4], Integer.parseInt(p2[5])));
+
+			} else if (p2[0].equals("Strega")) {
+				personaggio = new Strega(p2[2], p2[3]);
+			} else if (p2[0].equals("Cane")) {
+				personaggio = new Cane(p2[2], p2[3], p2[4], new Attrezzo(p2[5], Integer.parseInt(p2[6])));
 			}
 			this.nome2stanza.get(p2[1]).setPersonaggio(personaggio);
-			//Stanza Personaggio= new StanzaBloccata(p2[0], p2[1], Direzione.valueOf(p2[2].toUpperCase()));
-			//this.nome2stanza.put(p2[0], stanza);
+			// Stanza Personaggio= new StanzaBloccata(p2[0], p2[1],
+			// Direzione.valueOf(p2[2].toUpperCase()));
+			// this.nome2stanza.put(p2[0], stanza);
 		}
 
 	}
@@ -178,7 +192,10 @@ public class CaricatoreLabirinto {
 			String nomeAttrezzo = null;
 			String pesoAttrezzo = null;
 			String nomeStanza = null;
+
 			try (Scanner scannerLinea = new Scanner(specificaAttrezzo)) {
+				if (specificaAttrezzo.equals("")) return;
+				scannerLinea.useDelimiter("\\s*-\\s*");
 				check(scannerLinea.hasNext(), msgTerminazionePrecoce("il nome di un attrezzo."));
 				nomeAttrezzo = scannerLinea.next();
 				check(scannerLinea.hasNext(), msgTerminazionePrecoce("il peso dell'attrezzo " + nomeAttrezzo + "."));
@@ -211,28 +228,30 @@ public class CaricatoreLabirinto {
 
 	private void leggiEImpostaUscite() throws FormatoFileNonValidoException {
 		String specificheUscite = this.leggiRigaCheCominciaPer(USCITE_MARKER);
-		/*
-		 * try (Scanner scannerDiLinea = new Scanner(specificheUscite)) {
-		 * 
-		 * while (scannerDiLinea.hasNext()) { check(scannerDiLinea.hasNext(),
-		 * msgTerminazionePrecoce("le uscite di una stanza.")); String stanzaPartenza =
-		 * scannerDiLinea.next(); check(scannerDiLinea.hasNext(),
-		 * msgTerminazionePrecoce("la direzione di una uscita della stanza "
-		 * +stanzaPartenza)); String dir = scannerDiLinea.next();
-		 * check(scannerDiLinea.hasNext(),
-		 * msgTerminazionePrecoce("la destinazione di una uscita della stanza "
-		 * +stanzaPartenza+" nella direzione "+dir)); String stanzaDestinazione =
-		 * scannerDiLinea.next();
-		 * 
-		 * impostaUscita(stanzaPartenza, dir, stanzaDestinazione); } }
-		 */
 
 		for (String p : separaStringheAlleVirgole(specificheUscite)) {
-			String[] p2 = p.split(" ");
-			String stanzaPartenza = p2[0];
-			String dir = p2[1];
-			String stanzaDestinazione = p2[2];
-			impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
+			try (Scanner scannerDiLinea = new Scanner(p)) {
+				scannerDiLinea.useDelimiter("\\s*-\\s*");
+				while (scannerDiLinea.hasNext()) {
+					check(scannerDiLinea.hasNext(), msgTerminazionePrecoce("le uscite di una stanza."));
+					String stanzaPartenza = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(),
+							msgTerminazionePrecoce("la direzione di una uscita della stanza " + stanzaPartenza));
+					String dir = scannerDiLinea.next();
+					check(scannerDiLinea.hasNext(), msgTerminazionePrecoce("la destinazione di una uscita della stanza "
+							+ stanzaPartenza + " nella direzione " + dir));
+					String stanzaDestinazione = scannerDiLinea.next();
+
+					impostaUscita(stanzaPartenza, dir, stanzaDestinazione);
+				}
+			}
+
+			/*
+			 * for (String p : separaStringheAlleVirgole(specificheUscite)) { String[] p2 =
+			 * p.split("-"); String stanzaPartenza = p2[0]; String dir = p2[1]; String
+			 * stanzaDestinazione = p2[2]; impostaUscita(stanzaPartenza, dir,
+			 * stanzaDestinazione);
+			 */
 		}
 	}
 

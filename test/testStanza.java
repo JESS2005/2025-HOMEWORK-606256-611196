@@ -31,7 +31,7 @@ public class testStanza {
 		List<String> dirtest = this.stanza.getDirezioni();
 		assertNotNull(dirtest);
 		assertTrue(dirtest.size()==1);
-		assertEquals(dirtest.get(0),"est");
+		assertEquals(dirtest.get(0),"EST");
 	}
 	
 	@Test

@@ -21,6 +21,14 @@ public abstract class AbstractPersonaggio {
 	public String getNome() {
 		return this.nome;
 	}
+	
+	public String getStringVisto() {
+		if (this.haSalutato) {
+			return this.nome;
+		} else {
+			return "un "+this.getClass().getSimpleName();
+		}
+	}
 
 	public boolean haSalutato() {
 		return this.haSalutato;

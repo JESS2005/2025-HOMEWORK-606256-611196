@@ -21,17 +21,18 @@ public class Partita {
 	private Giocatore giocatore;
 	
 	public Partita(){
-		this.labirinto= new Labirinto();
-		this.setStanzaCorrente(labirinto.getStanzaIniziale());
-		this.finita = false;
-		this.giocatore = new Giocatore(CFU_INIZIALI);
+		this(new Labirinto.LabirintoBuilder().getLabirinto());
 	}
 	
 	public Partita(Labirinto labirinto){
 		this.labirinto=labirinto;
 		this.setStanzaCorrente(labirinto.getStanzaIniziale());
 		this.finita = false;
-		this.giocatore = new Giocatore(CFU_INIZIALI);
+		if (CaricatoreProprieta.getCFU()==0) {
+			this.giocatore = new Giocatore(CFU_INIZIALI);
+		} else {
+			this.giocatore = new Giocatore(CaricatoreProprieta.getCFU());
+		}
 	}
 
     /**

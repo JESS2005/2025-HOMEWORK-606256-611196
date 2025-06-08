@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class testPartita {
@@ -12,7 +11,7 @@ public class testPartita {
 	private Partita partita;
 	@BeforeEach
 	void setUp() {
-		this.partita=new Partita(LabirintoBuilder.labirintoTest().getLabirinto());
+		this.partita=new Partita(Labirinto.LabirintoBuilder.labirintoTest().getLabirinto());
 	}
 	
 	

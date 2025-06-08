@@ -12,20 +12,19 @@ import org.junit.Test;
 
 import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.ambienti.StanzaBloccata;
 import it.uniroma3.diadia.ambienti.StanzaMagica;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class testLabirintoBuilder {
-	private LabirintoBuilder labirintoBuilder;
+	private Labirinto.LabirintoBuilder labirintoBuilder;
 	private String nomeStanzaIniziale = "Atrio";
 	private String nomeStanzaVincente = "Uscita";
 
 	@Before
 	public void setUp() throws Exception {
-		labirintoBuilder = new LabirintoBuilder();
+		labirintoBuilder = new Labirinto.LabirintoBuilder();
 	}
 
 	@Test
@@ -71,8 +70,8 @@ public class testLabirintoBuilder {
 				.addAdiacenza(nomeStanzaVincente, nomeStanzaIniziale, Direzione.SUD)
 				.getLabirinto();
 		assertEquals(bilocale.getStanzaVincente(),bilocale.getStanzaIniziale().getStanzaAdiacente(Direzione.NORD));
-		assertEquals(Collections.singletonList(Direzione.NORD),bilocale.getStanzaIniziale().getDirezioni());
-		assertEquals(Collections.singletonList(Direzione.SUD),bilocale.getStanzaVincente().getDirezioni());
+		assertEquals(Collections.singletonList("NORD"),bilocale.getStanzaIniziale().getDirezioni());
+		assertEquals(Collections.singletonList("SUD"),bilocale.getStanzaVincente().getDirezioni());
 	}
 	
 	@Test

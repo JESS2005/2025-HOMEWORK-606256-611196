@@ -13,7 +13,14 @@ public class ComandoVai extends AbstractComando {
 		Stanza prossimaStanza = null;
 		if(nome==null)
 			stampe.mostraMessaggio("Dove vuoi andare ?");
-		prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(Direzione.valueOf(nome.toUpperCase()));
+		//Direzione.enumConstantDirectory().get("A");
+		//prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(Direzione.valueOf(nome.toUpperCase()));
+		try {
+			prossimaStanza = partita.getStanzaCorrente().getStanzaAdiacente(Direzione.valueOf(nome.toUpperCase()));
+		} catch (IllegalArgumentException e) {
+			stampe.mostraMessaggio("Direzione inesistente");
+			return;
+		}
 		if (prossimaStanza == null)
 			stampe.mostraMessaggio("Direzione inesistente");
 		else {

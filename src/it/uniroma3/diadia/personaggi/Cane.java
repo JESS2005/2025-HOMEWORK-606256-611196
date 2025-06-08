@@ -23,7 +23,7 @@ public class Cane extends AbstractPersonaggio {
 	public String riceviRegalo (Attrezzo attrezzo, Partita partita) {
 		if(attrezzo.getNome().equals(cibo)) {
 			partita.getStanzaCorrente().addAttrezzo(att);
-			return "chip chip";
+			return "chip chip :)";
 		} else {
 			int cfu=partita.getGiocatore().getCfu();
 			partita.getGiocatore().setCfu(--cfu);

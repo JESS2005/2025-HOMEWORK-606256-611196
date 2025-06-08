@@ -3,6 +3,7 @@ package it.uniroma3.diadia.ambienti;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,8 +33,8 @@ public class Stanza {
 
 	private Map<String, Attrezzo> attrezzi = new HashMap<String, Attrezzo>();
 
-	private Map<Direzione, Stanza> stanzeAdiacenti = new HashMap<Direzione, Stanza>();
-
+	private Map<Direzione, Stanza> stanzeAdiacenti = new EnumMap<>(Direzione.class);
+	
 	/**
 	 * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
 	 * 
@@ -123,7 +124,7 @@ public class Stanza {
 		for (Map.Entry<String, Attrezzo> m : this.attrezzi.entrySet())
 			risultato.append(" " + m.getValue().toString());
 		if (personaggio!=null)
-			risultato.append("\nVedi un "+personaggio.getClass().getSimpleName());
+			risultato.append("\nVedi "+personaggio.getStringVisto());
 		return risultato.toString();
 	}
 
@@ -184,7 +185,7 @@ public class Stanza {
 		SortedSet<Stanza> ad=new TreeSet<Stanza>(new ComparatorePerAtt());
 		List<Stanza> temp=new ArrayList<Stanza>(stanzeAdiacenti.values());
 		Collections.shuffle(temp); //randomizziamo per quando più stanze hanno gli stessi attrezzi
-		ad.addAll(temp);
+		ad.addAll(temp); //ci sarà una singola stanza per numero di attrezzi, ma va bene così
 		return ad;
 	}
 	

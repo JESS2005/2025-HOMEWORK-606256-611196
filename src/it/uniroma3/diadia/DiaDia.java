@@ -3,7 +3,6 @@ package it.uniroma3.diadia;
 import java.io.FileNotFoundException;
 
 import it.uniroma3.diadia.ambienti.Labirinto;
-import it.uniroma3.diadia.ambienti.LabirintoBuilder;
 import it.uniroma3.diadia.ambienti.Stanza;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.comandi.Comando;
@@ -88,82 +87,20 @@ public class DiaDia {
 		
 	}
 
-	/*
-	 * private boolean processaIstruzione(String istruzione) { Comando
-	 * comandoDaEseguire = new Comando(istruzione);
-	 * 
-	 * if (comandoDaEseguire.getNome().equals("fine")) { this.fine(); return true; }
-	 * else if (comandoDaEseguire.getNome().equals("vai"))
-	 * this.vai(comandoDaEseguire.getParametro()); else if
-	 * (comandoDaEseguire.getNome().equals("aiuto")) this.aiuto(); else if
-	 * (comandoDaEseguire.getNome().equals("prendi"))
-	 * this.prendi(comandoDaEseguire.getParametro()); else if
-	 * (comandoDaEseguire.getNome().equals("posa"))
-	 * this.posa(comandoDaEseguire.getParametro()); else
-	 * this.stampe.mostraMessaggio("Comando sconosciuto");
-	 * 
-	 * if (this.partita.vinta()) { this.stampe.mostraMessaggio("Hai vinto!"); return
-	 * true; } if(this.partita.isFinita() ) {
-	 * this.stampe.mostraMessaggio("Hai perso!"); return true; }else return false; }
-	 * 
-	 */
 
-	// implementazioni dei comandi dell'utente:
-
-	/**
-	 * Stampa informazioni di aiuto.
-	 */
-
-
-
-	/**
-	 * Comando "Fine".
-	 */
-	private void fine() {
-		this.stampe.mostraMessaggio("Grazie di aver giocato!"); // si desidera smettere
-	}
-
-	private void prendi(String nome) {
-		if (nome != null) {
-			Attrezzo att = partita.getStanzaCorrente().getAttrezzo(nome);
-			if (att != null) {
-				if (partita.getGiocatore().getBorsa().addAttrezzo(att)) {
-					partita.getStanzaCorrente().removeAttrezzo(att);
-					this.stampe.mostraMessaggio("Hai preso: " + nome);
-				} else {
-					this.stampe.mostraMessaggio("Borsa piena");
-				}
-			} else {
-				this.stampe.mostraMessaggio("Niente " + nome);
-			}
-		}
-	}
-
-	private void posa(String nome) {
-		if (nome != null) {
-			if (!partita.getStanzaCorrente().isPiena()) {
-				Attrezzo att = partita.getGiocatore().getBorsa().removeAttrezzo(nome);
-				if (att != null) {
-					partita.getStanzaCorrente().addAttrezzo(att);
-					this.stampe.mostraMessaggio("Hai posato: " + nome);
-				} else {
-					this.stampe.mostraMessaggio("Niente " + nome);
-				}
-			} else {
-				this.stampe.mostraMessaggio("La stanza è piena");
-			}
-		}
-	}
 
 	public static void main(String[] argc) throws FileNotFoundException, FormatoFileNonValidoException {
-		IO io = new IOConsole();
-		CaricatoreLabirinto CarLab= new CaricatoreLabirinto("labirinti/Lab.txt");
+		IOConsole ioC=new IOConsole();
+		IO io = ioC;
+		CaricatoreLabirinto CarLab= new CaricatoreLabirinto("diadia.labirinth");
+		new CaricatoreProprieta("diadia.properties").carica();
 		CarLab.carica();
-		LabirintoBuilder builder = new LabirintoBuilder(CarLab);
+		Labirinto.LabirintoBuilder builder = new Labirinto.LabirintoBuilder(CarLab);
 		Labirinto labirinto=builder.getLabirinto();
 		//Labirinto labirinto = LabirintoBuilder.labirintoBase().getLabirinto();
 		DiaDia gioco = new DiaDia(labirinto, io);
 		gioco.gioca();
+		ioC.close();
 
 	}
 }
