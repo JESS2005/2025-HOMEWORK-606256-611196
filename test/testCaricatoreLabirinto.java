@@ -89,6 +89,6 @@ public class testCaricatoreLabirinto {
 		Labirinto labirinto=new Labirinto.LabirintoBuilder(lab).getLabirinto();
 		assertEquals(2,labirinto.getMappa().size());
 		assertEquals(new Attrezzo("osso",2),labirinto.getMappa().get("atrio").getAttrezzo("osso"));
-		assertEquals("OVEST",labirinto.getMappa().get("atrio").getDirezioni().getFirst());
+		assertEquals("OVEST",labirinto.getMappa().get("atrio").getDirezioni().get(0));
 	}
 }

@@ -95,18 +95,19 @@ class testInteraPartita {
 	
 	@Test
 	void testStrega() {
-		String[] comandi= {"prendi osso","vai est","saluta","regala osso","interagisci","guarda","fine"};
+		String[] comandi= {"vai sud","prendi lanterna","vai est","saluta","regala lanterna","interagisci","guarda","fine"};
 		IOSimulator io= new IOSimulator(comandi,40);
 		DiaDia gioco = new DiaDia(Labirinto.LabirintoBuilder.labirintoBase().getLabirinto(),io);
 		gioco.gioca();
 
 		String[] expected= {"ignora",
-				"Hai preso: osso",
+				"ignora",
+				"ignora",
 				"qui c'è buio pesto, devi portare: lanterna",
 				"Ciao, io sono Amelia la strega. 你好",
 				"AAAAAHAHAHAGHAGSHAGHOHOHOHOHOOH!!!!!!",
 				"ignora",
-				"Laboratorio Campus\n"+ "Uscite: est ovest\n" + "Attrezzi nella stanza:\n"+"Vedi un Mago\n" + "CFU: 19\n" + "Borsa vuota",
+				"Atrio\n"+ "Uscite: nord est sud ovest\n" + "Attrezzi nella stanza: osso (1kg)\n" + "CFU: 18\n" + "Borsa vuota",
 				"Grazie di aver giocato!"};
 		int i=0;
 		while (io.getLetti()[i]!=null && expected[i]!=null) {
