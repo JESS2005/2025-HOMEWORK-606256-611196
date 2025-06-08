@@ -1,9 +1,9 @@
 Stanze:N10,Biblioteca
-Stanze buie:Sgabuzzino lanterna
-Stanze magiche:Bagno 3
-Stanze bloccate:N9 chiave NORD
+Stanze buie:Sgabuzzino-lanterna
+Stanze magiche:Bagno-3
+Stanze bloccate:N9-chiave-NORD
 Inizio:N10
 Vincente:Biblioteca
-Attrezzi:Osso 5 N10,lanterna 2 N10
+Attrezzi:osso-5-N10,lanterna-2-N10
 Personaggi:Mago-N10-Giorgio-aaaaaa sono un mago-bacchetta-2,Strega-N9-Amelia-aaaaaaaa sono una strega,Cane-Bagno-Bolt come quello del film-aaaaaa sono un cane-osso-palla-6
-Uscite:N10 nord Biblioteca,Biblioteca sud N10,Sgabuzzino est N10,N10 ovest Sgabuzzino
+Uscite:N10-nord-Biblioteca,Biblioteca-sud-N10,Sgabuzzino-est-N10,N10-ovest-Sgabuzzino
